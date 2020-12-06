@@ -67,10 +67,10 @@ pipeline {
       stage('Run Image'){
            steps{
                sh ''' 
-               if [ $(docker ps -qf "name=nodejs_app") ]
+               if [ $(docker ps -qf "name=app_node") ]
                 then
                 echo "from if block"
-                docker kill nodejs_app && docker rm nodejs_app
+                docker kill app_node && docker rm app_node
                 docker run -d -p 9876:8080 --name nodejs_app "${registry}":"${BUILD_NUMBER}"
                 docker ps
                else
